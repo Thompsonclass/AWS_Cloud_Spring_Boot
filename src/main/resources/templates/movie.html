@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies List</title>
+</head>
+<body>
+    <h1>Movies List</h1>
+	<hr>
+    <div>
+        <!-- 영화 리스트 출력 -->
+        <div th:each="movie : ${movies}">
+            <img th:src="@{${movie.imageUrl}}" alt="Movie Image"/>
+            <h3 th:text="${movie.title}"></h3>
+            <p th:text="${movie.synopsis}"></p> 
+            <!-- 이미지 표시 -->
+			<button>
+    			<a th:href="@{/movies/{movieId}(movieId=${movie.id})}">리뷰 쓰기</a>
+			</button>
+			<hr>
+        </div>
+    </div>
+</body>
+</html>
