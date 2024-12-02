@@ -27,12 +27,12 @@ public class MovieService {
 	}
 
 	// 특정 영화의 상세 정보를 가져오는 메서드
-	public Movie getMovieById(String movieId) {
+	public Movie getMovieById(Long movieId) {
 		return movieRepository.findById(movieId).orElseThrow(() -> new RuntimeException("Movie not found"));
 	}
 
 	// MovieService 수정: 예외 처리 및 메소드 최적화
-	public void addReviewToMovie(String movieId, Review review) {
+	public void addReviewToMovie(Long movieId, Review review) {
 	    Movie movie = movieRepository.findById(movieId)
 	        .orElseThrow(() -> new RuntimeException("Movie not found for id: " + movieId));
 	    

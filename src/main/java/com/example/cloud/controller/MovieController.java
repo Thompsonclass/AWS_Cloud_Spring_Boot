@@ -12,7 +12,7 @@ import com.example.cloud.service.MovieService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/movies")  // 이 부분을 수정했습니다.
+@RequestMapping("/movies")
 public class MovieController {
 
     @Autowired
@@ -27,18 +27,23 @@ public class MovieController {
     }
 
     // 특정 영화의 상세 정보를 가져오는 API
-    @GetMapping("/{movieId}")  // URL 경로를 "/movies/{movieId}"로 수정
-    public String getMovieDetails(@PathVariable String movieId, Model model) {
+    @GetMapping("/{movieId}")
+    public String getMovieDetails(@PathVariable Long movieId, Model model) {
         Movie movie = movieService.getMovieById(movieId);
+        if (movie == null) {
+            return "error";  // 영화가 없는 경우 오류 페이지로 이동
+        }
         model.addAttribute("movie", movie);
-        return "movieDetails"; // movie-details.html로 이동
+        return "movieDetails"; // movieDetails.html로 이동
     }
 
     // 영화에 대한 리뷰를 추가하는 API
-    @PostMapping("/{movieId}/review")  // URL 경로를 "/movies/{movieId}/review"로 수정
-    public String addReview(@PathVariable String movieId, @RequestParam int rating, @RequestParam String content) {
-        // 영화 ID로 영화 정보를 가져옵니다.
+    @PostMapping("/{movieId}/review")
+    public String addReview(@PathVariable Long movieId, @RequestParam int rating, @RequestParam String content) {
         Movie movie = movieService.getMovieById(movieId);
+        if (movie == null) {
+            return "error";  // 영화가 없는 경우 오류 페이지로 이동
+        }
 
         // 리뷰 객체 생성 및 설정
         Review review = new Review();
