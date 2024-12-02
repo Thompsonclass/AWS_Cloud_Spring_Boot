@@ -16,7 +16,7 @@ public class Movie {
 
 	@Id
 	// 데이터베이스에서 이 필드를 기본 키로 지정합니다.
-	private String id;
+	private int id;
 
 	private String title;
 	// 영화의 제목을 저장합니다.
@@ -36,12 +36,12 @@ public class Movie {
 	// Getters and Setters
 	// 클래스 필드에 접근하고 값을 설정하기 위한 메서드입니다.
 
-	public String getId() {
+	public int getId() {
 		// id 필드 값을 반환합니다.
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		// id 필드 값을 설정합니다.
 		this.id = id;
 	}
